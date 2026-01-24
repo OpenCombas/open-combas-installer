@@ -1,0 +1,47 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="ApplicationComponents" Directory="InstallFolder">
+      <Files Include="..\PipelineBuildOutput\**">
+        <Exclude Files="..\PipelineBuildOutput\CombasLauncherApp.exe" />
+      </Files>
+      <Files Include=".\SupportingFolders\**\*" />
+      <Component>
+        <File Id="ApplicationExecutable" Source="..\PipelineBuildOutput\CombasLauncherApp.exe" />
+      </Component>
+    </ComponentGroup>
+
+    <StandardDirectory Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop"
+                 Guid="{049012d0-6369-4c7e-a1a7-a159fb264ee5}" >
+        <Shortcut Id="ApplicationDesktopShortcut"
+                  Name="!(bind.Property.ProductName)"
+                  Description="OpenCOMBAS"
+                  Target="[InstallFolder]CombasLauncherApp.exe"
+                  WorkingDirectory="InstallFolder" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\!(bind.Property.Manufacturer)\!(bind.Property.ProductName)"
+                       Name="installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes"/>
+      </Component>
+    </StandardDirectory>
+    <StandardDirectory Id="StartMenuFolder">
+      <Component Id="ApplicationShortcutStartMenu"
+                 Guid="{92aca432-51df-491e-8480-6565cbb28ad0}">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="!(bind.Property.ProductName)"
+                  Description="OpenCOMBAS"
+                  Target="[InstallFolder]CombasLauncherApp.exe"
+                  WorkingDirectory="InstallFolder" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\!(bind.Property.Manufacturer)\!(bind.Property.ProductName)"
+                       Name="installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes"/>
+      </Component>
+    </StandardDirectory>
+    
+  </Fragment>
+</Wix>

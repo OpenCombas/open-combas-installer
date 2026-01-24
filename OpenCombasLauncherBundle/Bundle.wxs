@@ -1,0 +1,77 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" 
+     xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+ 
+  <Bundle
+    Id="OpenCOMBAS.OpenCOMBASLauncher" 
+    Name="OpenCOMBASLauncher"
+    Manufacturer="OpenCOMBAS"
+    UpgradeCode="81c6e56f-87ad-4e7e-a8c3-c77089ce115d"
+    Version="0.0.0.1">
+    <BootstrapperApplication>
+      <!-- Define Application look and licence -->
+      <bal:WixStandardBootstrapperApplication
+        LicenseUrl="" 
+        Theme="hyperlinkLicense" />
+    </BootstrapperApplication>
+
+
+    <!-- Detection for .NET 10 Desktop Runtime - checks for version 10.x or higher -->
+    <util:RegistrySearch
+      Id="DotNet10DesktopRegistry"
+      Root="HKLM"
+      Key="SOFTWARE\WOW6432Node\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App"
+      Value="10.0.1"
+      Variable="DotNet10DesktopInstalled"
+      Result="exists" />
+
+    <!-- Alternative: Check if any 10.x version exists (will detect 10.0.1, 10.0.2, etc.) -->
+    <util:DirectorySearch
+      Id="DotNet10DesktopFolder"
+      Path="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App"
+      Variable="DotNet10DesktopPath"
+      Result="exists"
+      After="DotNet10DesktopRegistry" />
+
+    <util:FileSearch
+      Id="DotNet10DesktopVersionFile"
+      Path="[DotNet10DesktopPath]\10.0.1"
+      Variable="DotNet10DesktopVersionGood"
+      Result="exists"
+      Condition="DotNet10DesktopPath"
+      After="DotNet10DesktopFolder" />
+    
+    
+    <Chain>
+      <!-- .NET 10 Desktop Runtime -->
+      <!--Use this instead of Source File if you want the user to download instead: DownloadUrl="https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/10.0.1/windowsdesktop-runtime-10.0.1-win-x64.exe"-->
+      <ExePackage
+        Id="DotNet10Desktop"
+        Name="windowsdesktop-runtime-10.0.1-win-x64.exe"
+        DisplayName=".NET 10 Desktop Runtime (x64)"
+        SourceFile="Payloads\windowsdesktop-runtime-10.0.1-win-x64.exe"
+        PerMachine="yes"
+        Permanent="yes"
+        Vital="yes"
+        InstallCondition="NOT DotNet10DesktopInstalled AND NOT DotNet10DesktopVersionGood"
+        Protocol="burn" />
+
+      <!-- TailScale Install-->
+      <MsiPackage
+        Id="TailScale"
+        SourceFile="Payloads\tailscale-setup-1.86.2-amd64.msi"
+        DisplayName="TailScale VPN"
+        Permanent="yes"
+        Vital="yes" />
+      
+      <!-- Main MSI Package -->
+      <!-- References the MSI built by the "OpenCombasLauncherMsi.wixproj" project -->
+      <MsiPackage
+        Id="MainPackage"
+        SourceFile="OpenCOMBASLauncher.msi"
+        Vital="yes"
+        Compressed="yes" />
+    </Chain>
+
+  </Bundle>
+</Wix>

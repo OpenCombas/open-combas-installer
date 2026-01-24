@@ -1,0 +1,16 @@
+﻿<Project Sdk="WixToolset.Sdk/6.0.2">
+  <PropertyGroup>
+    <OutputType>Bundle</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Payloads\tailscale-setup-1.86.2-amd64.msi" />
+    <None Include="Payloads\windowsdesktop-runtime-10.0.1-win-x64.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.BootstrapperApplications.wixext" Version="6.0.2" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="6.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenCombasLauncherMsi\OpenCombasLauncherMsi.wixproj" />
+  </ItemGroup>
+</Project>

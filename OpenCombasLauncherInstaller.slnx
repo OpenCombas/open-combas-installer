@@ -2,6 +2,6 @@
   <Configurations>
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="../OpenCombasLauncherBundle/OpenCombasLauncherBundle.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" Id="12c5cca1-0b00-48ec-96bb-cf3a5e17d8ed" />
-  <Project Path="OpenCombasLauncherMsi.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" />
+  <Project Path="OpenCombasLauncherBundle/OpenCombasLauncherBundle.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" Id="12c5cca1-0b00-48ec-96bb-cf3a5e17d8ed" />
+  <Project Path="OpenCombasLauncherMsi/OpenCombasLauncherMsi.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" />
 </Solution>
