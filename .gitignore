@@ -6,3 +6,5 @@ OpenCombasLauncherBundle/bin/
 OpenCombasLauncherBundle/obj/
 
 PipelineBuildOutput/
+
+BuildOutput/

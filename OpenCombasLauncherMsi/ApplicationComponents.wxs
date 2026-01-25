@@ -1,12 +1,12 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <ComponentGroup Id="ApplicationComponents" Directory="InstallFolder">
-      <Files Include="..\PipelineBuildOutput\**">
-        <Exclude Files="..\PipelineBuildOutput\CombasLauncherApp.exe" />
+      <Files Include="..\BuildOutput\**">
+        <Exclude Files="..\BuildOutput\CombasLauncherApp.exe" />
       </Files>
       <Files Include=".\SupportingFolders\**\*" />
       <Component>
-        <File Id="ApplicationExecutable" Source="..\PipelineBuildOutput\CombasLauncherApp.exe" />
+        <File Id="ApplicationExecutable" Source="..\BuildOutput\CombasLauncherApp.exe" />
       </Component>
     </ComponentGroup>
 
