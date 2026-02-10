@@ -7,39 +7,30 @@
     Name="OpenCOMBASLauncher"
     Manufacturer="OpenCOMBAS"
     UpgradeCode="81c6e56f-87ad-4e7e-a8c3-c77089ce115d"
-    Version="0.0.0.1">
+    IconSourceFile="Resources\OpenCOMBAS.ico"
+    Version="0.0.0.2">
     <BootstrapperApplication>
       <!-- Define Application look and licence -->
       <bal:WixStandardBootstrapperApplication
         LicenseUrl="" 
-        Theme="hyperlinkLicense" />
+        Theme="hyperlinkLicense"
+        LogoFile="Resources\OpenCOMBAS.png"
+        LogoSideFile="Resources\OpenCOMBAS.png"
+        SuppressOptionsUI="yes"
+        />
     </BootstrapperApplication>
 
+    <!-- Upgrade Action: When a new version of the bundle is installed, it will automatically upgrade (replace) the old version -->
+    <RelatedBundle Id="81c6e56f-87ad-4e7e-a8c3-c77089ce115d" Action="Upgrade" />
 
-    <!-- Detection for .NET 10 Desktop Runtime - checks for version 10.x or higher -->
+    <!-- Check for .NET 10 Desktop Runtime -->
     <util:RegistrySearch
-      Id="DotNet10DesktopRegistry"
+      Id="DotNet1001"
       Root="HKLM"
       Key="SOFTWARE\WOW6432Node\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App"
       Value="10.0.1"
-      Variable="DotNet10DesktopInstalled"
+      Variable="DotNet1001Installed"
       Result="exists" />
-
-    <!-- Alternative: Check if any 10.x version exists (will detect 10.0.1, 10.0.2, etc.) -->
-    <util:DirectorySearch
-      Id="DotNet10DesktopFolder"
-      Path="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App"
-      Variable="DotNet10DesktopPath"
-      Result="exists"
-      After="DotNet10DesktopRegistry" />
-
-    <util:FileSearch
-      Id="DotNet10DesktopVersionFile"
-      Path="[DotNet10DesktopPath]\10.0.1"
-      Variable="DotNet10DesktopVersionGood"
-      Result="exists"
-      Condition="DotNet10DesktopPath"
-      After="DotNet10DesktopFolder" />
     
     
     <Chain>
@@ -52,8 +43,8 @@
         SourceFile="Payloads\windowsdesktop-runtime-10.0.1-win-x64.exe"
         PerMachine="yes"
         Permanent="yes"
-        Vital="yes"
-        InstallCondition="NOT DotNet10DesktopInstalled AND NOT DotNet10DesktopVersionGood"
+        Vital="no"
+        InstallCondition="NOT DotNet1001Installed"
         Protocol="burn" />
 
       <!-- TailScale Install-->

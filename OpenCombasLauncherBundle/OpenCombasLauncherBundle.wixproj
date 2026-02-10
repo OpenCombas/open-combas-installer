@@ -3,6 +3,10 @@
     <OutputType>Bundle</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Resources\OpenCOMBAS.ico" />
+    <Content Include="Resources\OpenCOMBAS.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Payloads\tailscale-setup-1.86.2-amd64.msi" />
     <None Include="Payloads\windowsdesktop-runtime-10.0.1-win-x64.exe" />
   </ItemGroup>

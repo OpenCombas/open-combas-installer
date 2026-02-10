@@ -7,7 +7,7 @@
     UpgradeCode="3a4cab70-4b7b-4744-b2c8-cd33e0728dc7"
     Compressed="true"
     Scope="perMachine"
-    Version="0.0.0.1"> <!--This version should come from the CI/CD Pipeline-->
+    Version="0.0.0.2"> <!--This version should come from the CI/CD Pipeline-->
 
     <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" AllowSameVersionUpgrades="yes"/>  <!--Configuration options for the upgrading of software, we are not allowing downgrades-->
 

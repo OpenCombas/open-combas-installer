@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Resources\OpenCOMBAS.ico" />
+    <Content Include="Resources\OpenCOMBAS.png" />
     <Content Include="SupportingFolders\builds\250807074018sc200stick.mcd\fromsoftware.txt" />
     <Content Include="SupportingFolders\builds\250807074018sc200stick.mcd\__thumbnail.png" />
     <Content Include="SupportingFolders\builds\250807074202triplesingle.mcd\fromsoftware.txt" />
